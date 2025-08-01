@@ -13,6 +13,7 @@ class TCPClient:
         self.start_byte = 0xA5
         self.stop_byte = 0x5A
         self.last_received_data = None
+        self.__data_updated = False
         self.is_running = False
         self.lock = threading.Lock()
 
@@ -52,6 +53,7 @@ class TCPClient:
                             data_dict = json.loads(actual_data.decode())
                             with self.lock:
                                 self.last_received_data = data_dict
+                                self.__data_updated = True
                         else:
                             print("CRC error")
                     else:
@@ -67,10 +69,19 @@ class TCPClient:
 
     def stop(self):
         self.is_running = False
+        self.__data_updated = False
 
     def get_last_received_data(self):
         with self.lock:
+            self.__data_updated = False # first read of data will automatically reset flag
             return self.last_received_data
+
+    def is_data_updated(self):
+        return self.__data_updated
+
+
+
+
 
 if __name__ == "__main__":
     client = TCPClient()
