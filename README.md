@@ -1,9 +1,9 @@
-TCP messanger that allow to send and receive dictionary. 
-This ways it is easy to exchange data between diffirent python programs. 
+TCP messanger that allow to send and receive a dictionary. 
+This ways it is easy to exchange data between different python programs. 
 
-For example one program connectol one equipment, another program control another equipment but log function need to know when each change happens 
+For example one program control one equipment, another program controls another equipment, but log function needs to know when each change happens 
 
-Application 1 -> send data to log appication
+Application 1 -> send data to log application
 
 Application 2 -> send data to log application
 
@@ -12,13 +12,13 @@ log application capture every change in single timeline.
 
 ***Freatures:***
 - Start and stop bits
-- CRC cehck for each package 
+- CRC check for each package 
 
 
   
-On server side, actually sending happens only when package updated, to reduce network trafic.  
-On client side datat recieved in background in order not to block application. 
-function ``` client.get_last_received_data() ``` return last retunred message. 
+On server side, actually sending happens only when package updated, to reduce network traffic.  
+On the client side, datat received in the background in order not to block application. 
+function ``` client.get_last_received_data() ``` return last returned message. 
 There is a flag ``` .data_updated ``` that sets when new package arrive and recent when you first read the data. 
 
 ***Server example:*** 
